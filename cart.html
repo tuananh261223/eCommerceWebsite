@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Store</title>
+  <link rel="stylesheet" href="styles.css"></link>
+  <!-- Link to Bootstrap Icons stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+  <!-- Defer loading of the cart.js file -->
+  <script defer src="cart.js"></script>
+  <script src="data.js"></script>
+  <!-- Defer loading of the profile.js file -->
+  <script defer src="profile.js"></script>
+</head>
+<body>
+  <!-- Header section containing the navigation bar -->
+  <header>
+    <div class="navbar">
+      <!-- Logo linking to the homepage -->
+      <a href="index.html"><h1>WALTZ APPAREL</h1></a>
+      <!-- Container for profile and cart links -->
+      <div class="cart-account">
+         <!-- The javascript function 'userLoggedIn()' injects code into this container depending on whether the user is signed in -->
+        <div class="user" id="user">
+
+        </div>
+        <!-- Dropdown for user profile options -->
+        <div class="dropdown">
+          <!-- Profile icon with an onclick event to toggle the dropdown menu -->
+          <i class="bi bi-person-square" style="font-size: 35px;" id="profileIcon" onclick="toggleMenu()"></i>
+          <!-- Dropdown menu with sign-in, sign-up, and sign-out options -->
+          <ul class="dropdown-options" id="dropdownOptions">
+            <li><a id="memberP" ><u>Sign In</u></a></li>
+            <li><a id="newMemberP"><u>Sign Up</u></a></li>
+            <li><a onclick="signOut()"><u>Sign Out</u></a></li>
+          </ul>
+        </div>
+        <!-- Shopping cart icon with quantity indicator -->
+        <div class="cart">
+          <i class="bi bi-bag"></i>
+          <div class="cart-quantity" id="cartQuantity">0</div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Main content section -->
+  <main>
+    <!-- Popup background box for the member sign-up/login forms -->
+    <div class="popup-background-box" id="popupBackgroundBox">
+      <div class="popup-background"></div>
+    </div>
+    <!-- Popup box containing the member sign-up/login forms -->
+    <div class="popup-box" id="popupBox">
+      <!-- Form for new member sign-up -->
+      <div class="member" id="newMember">
+        <!-- Close button for the popup -->
+        <i class="bi bi-x-lg" style="position: absolute; right: 35px; top: 20px;" onclick="removePopup()"></i>
+        <h3 id="change_NM">New Member?</h3>
+        <p>CREATE AN ACCOUNT</p>
+        <!-- Input fields for email and password, along with a submit button -->
+        <form class="form">
+          <input type="email" name="email" id="emailNewMember" placeholder="EMAIL" required autocomplete="email" onfocus="this.value=''" onclick="document.getElementById('emailNewMember').value = ''"></input>
+          <br><input type="password" name="password" id="passwordNewMember" minlength="8" maxlength="20" placeholder="PASSWORD" required autocomplete="password" onfocus="this.value=''" onclick="document.getElementById('passwordNewMember').value = ''"></input></br>
+          <input type="button" value="Submit" onclick="signUp()" id="signUpButton"></input>
+          <!-- Note about a discount for new members -->
+          <p>*new members get 15% off their order</p>
+          <!-- Link to switch to the member login form -->
+          <a onclick= "memberPopup()"><u>Already a member?</u></a>
+        </form>
+      </div>
+      <!-- Form for existing member login -->
+      <div class="member" id="member">
+        <!-- Close button for the popup -->
+        <i class="bi bi-x-lg" style="position: absolute; right: 35px; top: 20px;" onclick="removePopup()" id="exitButton"></i>
+        <h3 id="change_M">MEMBER LOGIN</h3>
+        <!-- Input fields for email and password, along with a sign-in button -->
+        <form class="form">
+          <input type="email" name="email" id="emailMember" placeholder="EMAIL" required autocomplete="email" onfocus="this.value=''"></input>
+          <br><input type="password" name="password" id="passwordMember" placeholder="PASSWORD" required autocomplete="password" onfocus="this.value=''"></input></br>
+          <input type="button" value="Sign in" class="sign-in" onclick="login()" id="signInButton"></input>
+          <!-- Link to switch to the new member sign-up form -->
+          <br><a onclick= "newMemberPopup()" id="newMemberPopup"><u>Not a member yet?</u></a></br>
+          <!-- Note about a discount for new members -->
+          <p id="discount">*new members get 15% off their order</p>
+        </form>
+      </div>
+    </div>
+    <!-- Container for displaying cart details and items -->
+    <div class="cart-details" id="cartDetails"></div>
+    <div class="cart-display-items" id="cartDisplayItems"></div>
+  </main>
+</body>
+</html>
